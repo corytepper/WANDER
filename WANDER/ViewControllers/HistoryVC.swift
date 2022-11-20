@@ -11,7 +11,5 @@ class HistoryVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .darkGray
     }
 }
