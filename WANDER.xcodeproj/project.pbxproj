@@ -15,6 +15,9 @@
 		2FED57F0292952AE00E59556 /* WANDERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED57EF292952AE00E59556 /* WANDERUITests.swift */; };
 		2FED57F2292952AE00E59556 /* WANDERUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED57F1292952AE00E59556 /* WANDERUITestsLaunchTests.swift */; };
 		2FED58032929545500E59556 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED58022929545500E59556 /* BaseVC.swift */; };
+		2FED5805292A66EE00E59556 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5804292A66EE00E59556 /* TabBarVC.swift */; };
+		2FED5807292A693900E59556 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5806292A693900E59556 /* HomeVC.swift */; };
+		2FED5809292A695700E59556 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5808292A695700E59556 /* HistoryVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		2FED57EF292952AE00E59556 /* WANDERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WANDERUITests.swift; sourceTree = "<group>"; };
 		2FED57F1292952AE00E59556 /* WANDERUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WANDERUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2FED58022929545500E59556 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		2FED5804292A66EE00E59556 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		2FED5806292A693900E59556 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		2FED5808292A695700E59556 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 		2FED57FF2929540000E59556 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2FED5804292A66EE00E59556 /* TabBarVC.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -152,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				2FED58022929545500E59556 /* BaseVC.swift */,
+				2FED5806292A693900E59556 /* HomeVC.swift */,
+				2FED5808292A695700E59556 /* HistoryVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -287,7 +296,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FED57CF292952AD00E59556 /* AppDelegate.swift in Sources */,
+				2FED5809292A695700E59556 /* HistoryVC.swift in Sources */,
+				2FED5807292A693900E59556 /* HomeVC.swift in Sources */,
 				2FED58032929545500E59556 /* BaseVC.swift in Sources */,
+				2FED5805292A66EE00E59556 /* TabBarVC.swift in Sources */,
 				2FED57D1292952AD00E59556 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

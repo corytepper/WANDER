@@ -9,6 +9,33 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+//    var window: UIWindow?
+//
+//
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//
+//        window                     = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//        window?.windowScene        = windowScene
+//        window?.rootViewController = TabBarVC()
+//        window?.makeKeyAndVisible()
+//
+////        configureNaviagtionBar()
+//    }
+//
+//
+////    func configureNaviagtionBar() {
+////        if #available(iOS 15, *) {
+////                   UINavigationBar.appearance().scrollEdgeAppearance = UINavigationBarAppearance()
+////               }
+////        UINavigationBar.appearance().tintColor = .systemGreen
+////    }
+//
+    
+    
+    
+    
+    
     var window: UIWindow?
 
 
@@ -17,14 +44,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        
-        //temp code
-        let vc = BaseVC()
-        window.rootViewController = vc
-        
+        window.rootViewController = TabBarVC()
         self.window = window
         window.makeKeyAndVisible()
-        //temp code
+        
+        
+       
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
