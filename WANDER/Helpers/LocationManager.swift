@@ -17,7 +17,7 @@ final class LocationManager {
         manager.activityType = .fitness
     }
     
-    func checkLocatiomAuthorization() {
+    func checkLocationAuthorization() {
         if manager.authorizationStatus != .authorizedWhenInUse {
             manager.requestWhenInUseAuthorization()
         }
