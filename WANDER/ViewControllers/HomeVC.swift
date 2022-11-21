@@ -55,7 +55,9 @@ class HomeVC: BaseVC {
     
     //MARK: - Helpers
     @objc private func startWander() {
-        print("Start WANDER")
+        let currentWanderVC = CurrentWanderVC()
+        currentWanderVC.modalPresentationStyle = .fullScreen
+        present(currentWanderVC, animated: true)
     }
     
     private func setupViews() {
