@@ -24,6 +24,7 @@
 		2FED5811292BAF4200E59556 /* CurrentWanderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5810292BAF4200E59556 /* CurrentWanderVC.swift */; };
 		2FED5813292BCABF00E59556 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5812292BCABF00E59556 /* Int+Ext.swift */; };
 		2FED5815292BE22100E59556 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5814292BE22100E59556 /* Double+Ext.swift */; };
+		2FED5817292C4E0C00E59556 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED5816292C4E0C00E59556 /* HistoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		2FED5810292BAF4200E59556 /* CurrentWanderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWanderVC.swift; sourceTree = "<group>"; };
 		2FED5812292BCABF00E59556 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		2FED5814292BE22100E59556 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		2FED5816292C4E0C00E59556 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			children = (
 				2FED580A292A796000E59556 /* GradientView.swift */,
 				2FED580C292A890C00E59556 /* CircularButton.swift */,
+				2FED5816292C4E0C00E59556 /* HistoryTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 			files = (
 				2FED580D292A890C00E59556 /* CircularButton.swift in Sources */,
 				2FED57CF292952AD00E59556 /* AppDelegate.swift in Sources */,
+				2FED5817292C4E0C00E59556 /* HistoryTableViewCell.swift in Sources */,
 				2FED5815292BE22100E59556 /* Double+Ext.swift in Sources */,
 				2FED5809292A695700E59556 /* HistoryVC.swift in Sources */,
 				2FED5807292A693900E59556 /* HomeVC.swift in Sources */,
