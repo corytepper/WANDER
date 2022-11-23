@@ -37,7 +37,8 @@ class TabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.tintColor = .white
+        tabBar.unselectedItemTintColor = .white
+        tabBar.tintColor = .red
 
         setupViewControllers()
     }

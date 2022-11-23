@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class Run: Object {
+final class Wander: Object {
     
     @objc dynamic public private(set) var id = UUID().uuidString.lowercased()
     @objc dynamic public private(set) var pace = 0
@@ -47,7 +47,7 @@ final class Run: Object {
             do {
                 let realm = try Realm()
                 try realm.write({
-                    realm.add(Run(pace: pace, distance: distance, duration: duration, locations: locations))
+                    realm.add(Wander(pace: pace, distance: distance, duration: duration, locations: locations))
                     try realm.commitWrite()
                 })
             } catch {
@@ -57,12 +57,12 @@ final class Run: Object {
     }
     
     
-    static func getAllRuns() -> Results<Run>? {
+    static func getAllWanders() -> Results<Wander>? {
         do {
             let realm = try Realm()
-            var runCollection = realm.objects(Run.self)
-            runCollection = runCollection.sorted(byKeyPath: "date", ascending: false)
-            return runCollection
+            var wanderCollection = realm.objects(Wander.self)
+            wanderCollection = wanderCollection.sorted(byKeyPath: "date", ascending: false)
+            return wanderCollection
             
         } catch {
             return nil

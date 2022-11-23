@@ -26,7 +26,6 @@ class HistoryVC: BaseVC {
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.allowsSelection = false
         table.delegate = self
         table.dataSource = self
         table.register(HistoryTableViewCell.self, forCellReuseIdentifier: Self.reuseId)
@@ -41,6 +40,11 @@ class HistoryVC: BaseVC {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     private func setupViews() {
@@ -71,22 +75,37 @@ class HistoryVC: BaseVC {
 // MARK: - Extension
 extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return Wander.getAllWanders()?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reuseId) as? HistoryTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Self.reuseId) as? HistoryTableViewCell,
+            let wander = Wander.getAllWanders()?[indexPath.row] else {
             return UITableViewCell()
         }
-        
-        cell.totalMiles = Double(indexPath.row)
-        cell.totalTime = "0:23:12"
-        cell.entryDate = "11/11/2011"
+       
+        // call configure cell here
+            cell.configure(wander: wander)
         
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let wander = Wander.getAllWanders()?[indexPath.row] else {
+            return
+        }
+        
+        let vc = PreviousWanderDetailVC(wander: wander)
+        present(vc, animated: true)
+        
     }
 }

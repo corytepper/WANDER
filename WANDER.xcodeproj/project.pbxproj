@@ -29,6 +29,8 @@
 		2FFF1B64292D01B00013261F /* Wander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF1B63292D01B00013261F /* Wander.swift */; };
 		2FFF1B66292D03550013261F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF1B65292D03550013261F /* Location.swift */; };
 		2FFF1B68292D05FD0013261F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF1B67292D05FD0013261F /* Constants.swift */; };
+		2FFF1B6A292D16AB0013261F /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF1B69292D16AB0013261F /* Date+Ext.swift */; };
+		2FFF1B6C292D2C220013261F /* PreviousWanderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF1B6B292D2C220013261F /* PreviousWanderDetailVC.swift */; };
 		6AAC3E40F331A371212D0446 /* Pods_WANDER.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C02DACC1B8042C41F99E46 /* Pods_WANDER.framework */; };
 		CDA02CB9C5825300D6396040 /* Pods_WANDER_WANDERUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2C304D65ABC135537C8731 /* Pods_WANDER_WANDERUITests.framework */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		2FFF1B63292D01B00013261F /* Wander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wander.swift; sourceTree = "<group>"; };
 		2FFF1B65292D03550013261F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		2FFF1B67292D05FD0013261F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2FFF1B69292D16AB0013261F /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		2FFF1B6B292D2C220013261F /* PreviousWanderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWanderDetailVC.swift; sourceTree = "<group>"; };
 		4FD4E02DB06C361F3D1241A6 /* Pods-WANDER.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WANDER.debug.xcconfig"; path = "Target Support Files/Pods-WANDER/Pods-WANDER.debug.xcconfig"; sourceTree = "<group>"; };
 		554B69D97E11BEB77AECC0D6 /* Pods-WANDER.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WANDER.release.xcconfig"; path = "Target Support Files/Pods-WANDER/Pods-WANDER.release.xcconfig"; sourceTree = "<group>"; };
 		5A2C304D65ABC135537C8731 /* Pods_WANDER_WANDERUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WANDER_WANDERUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +190,7 @@
 				2FED5812292BCABF00E59556 /* Int+Ext.swift */,
 				2FED5814292BE22100E59556 /* Double+Ext.swift */,
 				2FFF1B67292D05FD0013261F /* Constants.swift */,
+				2FFF1B69292D16AB0013261F /* Date+Ext.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				2FED5806292A693900E59556 /* HomeVC.swift */,
 				2FED5808292A695700E59556 /* HistoryVC.swift */,
 				2FED5810292BAF4200E59556 /* CurrentWanderVC.swift */,
+				2FFF1B6B292D2C220013261F /* PreviousWanderDetailVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -483,6 +489,7 @@
 			files = (
 				2FED580D292A890C00E59556 /* CircularButton.swift in Sources */,
 				2FED57CF292952AD00E59556 /* AppDelegate.swift in Sources */,
+				2FFF1B6A292D16AB0013261F /* Date+Ext.swift in Sources */,
 				2FED5817292C4E0C00E59556 /* HistoryTableViewCell.swift in Sources */,
 				2FED5815292BE22100E59556 /* Double+Ext.swift in Sources */,
 				2FED5809292A695700E59556 /* HistoryVC.swift in Sources */,
@@ -495,6 +502,7 @@
 				2FED5805292A66EE00E59556 /* TabBarVC.swift in Sources */,
 				2FED5811292BAF4200E59556 /* CurrentWanderVC.swift in Sources */,
 				2FED57D1292952AD00E59556 /* SceneDelegate.swift in Sources */,
+				2FFF1B6C292D2C220013261F /* PreviousWanderDetailVC.swift in Sources */,
 				2FFF1B64292D01B00013261F /* Wander.swift in Sources */,
 				2FED580F292A8F4D00E59556 /* LocationManager.swift in Sources */,
 			);

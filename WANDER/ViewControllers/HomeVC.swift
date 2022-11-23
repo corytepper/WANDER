@@ -51,8 +51,6 @@ class HomeVC: BaseVC {
     }
     
     
-    
-    
     //MARK: - Helpers
     @objc private func startWander() {
         let currentWanderVC = CurrentWanderVC()

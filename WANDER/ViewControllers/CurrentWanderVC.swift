@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreLocation
+import RealmSwift
+import ShimmerSwift
 
 class CurrentWanderVC: BaseVC {
     
@@ -117,7 +119,7 @@ class CurrentWanderVC: BaseVC {
         return stackView
     }()
     
-    private lazy var capsuleView: UIView = {
+    private lazy var sliderView: UIView = {
         let capsule = UIView()
         capsule.translatesAutoresizingMaskIntoConstraints = false
         capsule.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -130,7 +132,7 @@ class CurrentWanderVC: BaseVC {
         let knob = UIImageView()
         knob.translatesAutoresizingMaskIntoConstraints = false
         knob.isUserInteractionEnabled = true
-        knob.image = UIImage(systemName: "dot.arrowtriangles.up.right.down.left.circle")
+        knob.image = UIImage(systemName: "arrow.right.circle")
         knob.tintColor = .white
         knob.layer.borderColor = UIColor.white.cgColor
         knob.layer.borderWidth = 5
@@ -151,6 +153,23 @@ class CurrentWanderVC: BaseVC {
         return slider
     }()
     
+    private lazy var sliderText: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Slide to Stop"
+        label.textColor = .white
+        label.font = label.font.withSize(Self.subtitleFontSize)
+        return label
+    }()
+    
+    private lazy var sliderShimmer: ShimmeringView = {
+        let slider = ShimmeringView()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.shimmerSpeed = 1
+        slider.shimmerPauseDuration = 2
+        return slider
+    }()
+    
     // MARK: - Local variables
     private var startLocation: CLLocation!
     private var endLocation: CLLocation!
@@ -158,6 +177,7 @@ class CurrentWanderVC: BaseVC {
     private var wanderDistance = 0.0
     private var timeElapsed = 0
     private var pace = 0
+    fileprivate var coordLocations = List<Location>()
     
     private var locationManager = LocationManager()
     
@@ -177,6 +197,7 @@ class CurrentWanderVC: BaseVC {
         super.viewDidAppear(animated)
         locationManager.manager.delegate = self
         startWander()
+        sliderBounceAnimtation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -187,9 +208,15 @@ class CurrentWanderVC: BaseVC {
     private func setupViews() {
         view.addSubview(topLabel)
         view.addSubview(pageStackView)
-        view.addSubview(capsuleView)
-        capsuleView.addSubview(stopSliderKnob)
-        capsuleView.addSubview(sliderStop)
+        view.addSubview(sliderView)
+        sliderView.addSubview(stopSliderKnob)
+        sliderView.addSubview(sliderStop)
+        
+        sliderView.addSubview(sliderText)
+        sliderView.addSubview(sliderShimmer)
+        
+        sliderShimmer.contentView = sliderText
+        sliderShimmer.isShimmering = true
         
         let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector((dismissEnd(sender:))))
         stopSliderKnob.addGestureRecognizer(swipeGesture)
@@ -213,29 +240,42 @@ class CurrentWanderVC: BaseVC {
         
         // capsule view
         NSLayoutConstraint.activate([
-            capsuleView.widthAnchor.constraint(equalToConstant: 300),
-            capsuleView.heightAnchor.constraint(equalToConstant: 70),
-            capsuleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            capsuleView.topAnchor.constraint(equalTo: pageStackView.bottomAnchor, constant: 8),
-            capsuleView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            sliderView.widthAnchor.constraint(equalToConstant: 300),
+            sliderView.heightAnchor.constraint(equalToConstant: 70),
+            sliderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            sliderView.topAnchor.constraint(equalTo: pageStackView.bottomAnchor, constant: 8),
+            sliderView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         // stop slider knob
         NSLayoutConstraint.activate([
-            stopSliderKnob.leadingAnchor.constraint(equalTo: capsuleView.leadingAnchor, constant: 8),
-            stopSliderKnob.centerYAnchor.constraint(equalTo: capsuleView.centerYAnchor),
+            stopSliderKnob.leadingAnchor.constraint(equalTo: sliderView.leadingAnchor, constant: 8),
+            stopSliderKnob.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor),
             stopSliderKnob.widthAnchor.constraint(equalToConstant: 50),
             stopSliderKnob.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         // slider stop image
         NSLayoutConstraint.activate([
-            sliderStop.trailingAnchor.constraint(equalTo: capsuleView.trailingAnchor),
-            sliderStop.centerYAnchor.constraint(equalTo: capsuleView.centerYAnchor),
+            sliderStop.trailingAnchor.constraint(equalTo: sliderView.trailingAnchor),
+            sliderStop.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor),
             sliderStop.widthAnchor.constraint(equalToConstant: 70),
             sliderStop.heightAnchor.constraint(equalToConstant: 70)
         ])
         
+        // slider text
+        NSLayoutConstraint.activate([
+            sliderText.centerXAnchor.constraint(equalTo: sliderView.centerXAnchor),
+            sliderText.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor)
+        ])
+        
+        // shimmer
+        NSLayoutConstraint.activate([
+            sliderShimmer.leadingAnchor.constraint(equalTo: sliderView.leadingAnchor, constant: 75),
+            sliderShimmer.trailingAnchor.constraint(equalTo: sliderView.trailingAnchor, constant: -75),
+            sliderShimmer.topAnchor.constraint(equalTo: sliderView.topAnchor),
+            sliderShimmer.bottomAnchor.constraint(equalTo: sliderView.bottomAnchor)
+        ])
     }
     
     private func startWander() {
@@ -279,17 +319,31 @@ class CurrentWanderVC: BaseVC {
             if stopSliderKnob.center.x > sliderStop.center.x {
                 stopSliderKnob.center.x = sliderStop.center.x
                 stopWander()
+                
+                Wander.addWanderToRealm(pace: pace, distance: wanderDistance, duration: timeElapsed, locations: coordLocations)
+                
                 dismiss(animated: true)
-            } else if stopSliderKnob.center.x < capsuleView.bounds.minX + adjust {
-                stopSliderKnob.center.x = capsuleView.bounds.minX + adjust
+            } else if stopSliderKnob.center.x < sliderView.bounds.minX + adjust {
+                stopSliderKnob.center.x = sliderView.bounds.minX + adjust
             } else {
                 stopSliderKnob.center.x += translation.x
             }
             sender.setTranslation(.zero, in: view)
         } else if sender.state == .ended && stopSliderKnob.center.x < sliderStop.center.x {
             UIView.animate(withDuration: 0.5) {
-                self.stopSliderKnob.center.x = self.capsuleView.bounds.minX + adjust
+                self.stopSliderKnob.center.x = self.sliderView.bounds.minX + adjust
             }
+        }
+    }
+    
+    
+    private func sliderBounceAnimtation() {
+        UIView.animate(withDuration: 0.5) {
+            self.stopSliderKnob.center.x += 100
+        } completion: { _ in
+            UIView.animate(withDuration: 1, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseInOut) {
+                self.stopSliderKnob.center.x -= 100
+            } completion: { _ in }
         }
     }
     
@@ -302,6 +356,10 @@ extension CurrentWanderVC: CLLocationManagerDelegate {
             startLocation = locations.first
         } else if let location = locations.last {
             wanderDistance += endLocation.distance(from: location)
+            
+            let newLocation = Location(lat: endLocation.coordinate.latitude, long: endLocation.coordinate.longitude)
+            coordLocations.insert(newLocation, at: 0)
+            
             self.distanceLabel.text = self.wanderDistance.meterToMiles().toString(places: 2)
             
             if timeElapsed > 0 && wanderDistance > 0 {

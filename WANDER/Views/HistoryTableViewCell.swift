@@ -11,7 +11,7 @@ final class HistoryTableViewCell: UITableViewCell {
     // MARK: - external props
     var totalMiles: Double = 0.0 {
         didSet {
-            totalMilesLabel.text = String(format: "%0.1f", totalMiles)
+            totalMilesLabel.text = String(format: "%0.2f", totalMiles)
             layoutIfNeeded()
         }
     }
@@ -102,5 +102,9 @@ final class HistoryTableViewCell: UITableViewCell {
         setupConstraints()
     }
     
-    
+    func configure(wander: Wander) {
+        totalMiles = wander.distance.meterToMiles()
+        totalTime = wander.duration.formatTimeString()
+        entryDate = wander.date.getDateString()
+    }
 }
