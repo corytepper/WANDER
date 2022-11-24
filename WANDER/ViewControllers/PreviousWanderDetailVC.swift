@@ -12,13 +12,12 @@ final class PreviousWanderDetailVC: BaseVC {
     
     var wander: Wander
     
-    
     // MARK: - UI Elements
     private lazy var mapView: MKMapView = {
         let v = MKMapView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.alpha = 0.6
-//        v.delegate = self
+        v.delegate = self
         return v
     }()
  
@@ -188,13 +187,13 @@ extension PreviousWanderDetailVC: MKMapViewDelegate {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView!.canShowCallout = true
         } else {
-            annotationView?.annotation = annotation
+            annotationView!.annotation = annotation
         }
         
         if annotation.title == "Start" {
             annotationView!.pinTintColor = UIColor.green
         } else if annotation.title == "Finish" {
-            annotationView?.pinTintColor = UIColor.red
+            annotationView!.pinTintColor = UIColor.red
         }
         
         return annotationView
