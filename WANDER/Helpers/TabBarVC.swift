@@ -8,41 +8,18 @@
 import UIKit
 
 class TabBarVC: UITabBarController {
+    
 
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        UITabBar.appearance().tintColor = .systemGreen
-//        viewControllers          = [createHomeNC(), createHistoryNC()]
-//    }
-//
-//
-//    func createHomeNC() -> UINavigationController {
-//        let homeVC = HomeVC()
-////        homeVC.title = "Search"
-//        homeVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-//
-//        return UINavigationController(rootViewController: homeVC)
-//    }
-//
-//
-//    func createHistoryNC() -> UINavigationController {
-//        let historyVC = HistoryVC()
-////        historyVC.title = "Favorites"
-//        historyVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-//
-//        return UINavigationController(rootViewController: historyVC)
-//    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tabBar.unselectedItemTintColor = .white
         tabBar.tintColor = .red
-
+        
         setupViewControllers()
     }
 
+    
     private func setupViewControllers() {
         viewControllers = [
             createViewControllers(for: HomeVC(), title: "WANDER NOW", systemImage: "figure.walk"),
@@ -57,4 +34,8 @@ class TabBarVC: UITabBarController {
         viewController.tabBarItem = tabBarItem
         return viewController
     }
+    
+    
 }
+
+

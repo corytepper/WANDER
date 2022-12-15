@@ -22,10 +22,19 @@ class CurrentWanderVC: BaseVC {
         label.text = "WANDERING"
         label.textAlignment = .center
         label.font = label.font.withSize(Self.titleFontSize)
-        label.textColor = .darkGray
+        label.textColor = .white
         return label
     }()
     
+    private lazy var timeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.text = "Time spent outside exploring your beautiful world"
+        label.font = UIFont.boldSystemFont(ofSize: Self.subtitleFontSize)
+        return label
+    }()
+
     private lazy var timelabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,42 +44,6 @@ class CurrentWanderVC: BaseVC {
         return label
     }()
     
-    
-    private lazy var paceTitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.text = "Average Pace"
-        label.font = label.font.withSize(Self.subtitleFontSize)
-        return label
-    }()
-    
-    private lazy var paceLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.text = "0:00"
-        label.font = label.font.withSize(Self.titleFontSize)
-        return label
-    }()
-    
-    private lazy var paceSubtitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.text = "/mi"
-        label.font = label.font.withSize(Self.subtitleFontSize)
-        return label
-    }()
-    
-    private lazy var paceStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [paceTitleLabel, paceLabel, paceSubtitleLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .center
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
     
     private lazy var distanceTitleLabel: UILabel = {
         let label = UILabel()
@@ -100,6 +73,15 @@ class CurrentWanderVC: BaseVC {
         return label
     }()
     
+    private lazy var timeStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [timeTitleLabel, timelabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+    
     private lazy var distanceStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [distanceTitleLabel, distanceLabel, distanceSubtitleLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +92,7 @@ class CurrentWanderVC: BaseVC {
     }()
     
     private lazy var pageStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [timelabel, paceStackView, distanceStackView])
+        let stackView = UIStackView(arrangedSubviews: [timeStackView, distanceStackView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
         stackView.axis = .vertical
@@ -120,12 +102,12 @@ class CurrentWanderVC: BaseVC {
     }()
     
     private lazy var sliderView: UIView = {
-        let capsule = UIView()
-        capsule.translatesAutoresizingMaskIntoConstraints = false
-        capsule.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        capsule.layer.cornerRadius = 35
-        capsule.layer.masksToBounds = true
-        return capsule
+        let sliderView = UIView()
+        sliderView.translatesAutoresizingMaskIntoConstraints = false
+        sliderView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        sliderView.layer.cornerRadius = 35
+        sliderView.layer.masksToBounds = true
+        return sliderView
     }()
     
     private lazy var stopSliderKnob: UIImageView = {
@@ -197,7 +179,7 @@ class CurrentWanderVC: BaseVC {
         super.viewDidAppear(animated)
         locationManager.manager.delegate = self
         startWander()
-        sliderBounceAnimtation()
+        sliderBounceAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -305,11 +287,6 @@ class CurrentWanderVC: BaseVC {
         timelabel.text = timeElapsed.formatTimeString()
     }
     
-    private func computePace(time seconds: Int, miles: Double) -> String {
-        pace = Int(Double(seconds) / miles)
-        return pace.formatTimeString()
-        
-    }
     
     @objc private func dismissEnd(sender: UIPanGestureRecognizer) {
         let adjust: CGFloat = 35
@@ -337,7 +314,7 @@ class CurrentWanderVC: BaseVC {
     }
     
     
-    private func sliderBounceAnimtation() {
+    private func sliderBounceAnimation() {
         UIView.animate(withDuration: 0.5) {
             self.stopSliderKnob.center.x += 100
         } completion: { _ in
@@ -362,9 +339,6 @@ extension CurrentWanderVC: CLLocationManagerDelegate {
             
             self.distanceLabel.text = self.wanderDistance.meterToMiles().toString(places: 2)
             
-            if timeElapsed > 0 && wanderDistance > 0 {
-                paceLabel.text = computePace(time: timeElapsed, miles: wanderDistance.meterToMiles())
-            }
         }
         endLocation = locations.last
     }

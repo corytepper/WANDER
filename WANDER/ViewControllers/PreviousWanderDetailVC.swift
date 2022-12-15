@@ -12,6 +12,7 @@ final class PreviousWanderDetailVC: BaseVC {
     
     var wander: Wander
     
+    
     // MARK: - UI Elements
     private lazy var mapView: MKMapView = {
         let v = MKMapView()

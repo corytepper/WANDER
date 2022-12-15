@@ -78,15 +78,15 @@ class HomeVC: BaseVC {
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8),
-            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            mapView.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 10),
+            mapView.heightAnchor.constraint(equalToConstant: 640)
         ])
         
         // start button
         NSLayoutConstraint.activate([
             startButton.widthAnchor.constraint(equalToConstant: 100),
             startButton.heightAnchor.constraint(equalToConstant: 100),
-            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

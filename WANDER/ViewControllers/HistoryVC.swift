@@ -18,7 +18,7 @@ class HistoryVC: BaseVC {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "PAST WANDERS"
         label.textAlignment = .center
-        label.textColor = .darkGray
+        label.textColor = .white
         label.font = label.font.withSize(32)
         return label
     }()
@@ -32,6 +32,9 @@ class HistoryVC: BaseVC {
         table.backgroundColor = .clear
         table.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         table.separatorColor = .white
+        
+       
+        
         return table
     }()
     
@@ -65,8 +68,8 @@ class HistoryVC: BaseVC {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: topLabel.bottomAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 10),
+            tableView.heightAnchor.constraint(equalToConstant: 640)
         ])
     }
     
